@@ -1,0 +1,52 @@
+import argparse
+from bot.orders import create_order
+from bot.validators import *
+from bot.logging_config import setup_logging
+
+def main():
+    setup_logging()
+
+    parser = argparse.ArgumentParser(description="Binance Futures Trading Bot")
+
+    parser.add_argument("--symbol", required=True)
+    parser.add_argument("--side", required=True)
+    parser.add_argument("--type", required=True)
+    parser.add_argument("--quantity", required=True)
+    parser.add_argument("--price", required=False)
+
+    args = parser.parse_args()
+
+    try:
+        side = validate_side(args.side)
+        order_type = validate_order_type(args.type)
+        quantity = validate_quantity(args.quantity)
+
+        print("\n📌 Order Request Summary")
+        print("---------------------------")
+        print(f"Symbol: {args.symbol}")
+        print(f"Side: {side}")
+        print(f"Type: {order_type}")
+        print(f"Quantity: {quantity}")
+        if order_type == "LIMIT":
+            print(f"Price: {args.price}")
+
+        response = create_order(
+            symbol=args.symbol,
+            side=side,
+            order_type=order_type,
+            quantity=quantity,
+            price=args.price
+        )
+
+        print("\n✅ Order Placed Successfully!")
+        print("---------------------------")
+        print(f"Order ID: {response.get('orderId')}")
+        print(f"Status: {response.get('status')}")
+        print(f"Executed Qty: {response.get('executedQty')}")
+        print(f"Avg Price: {response.get('avgPrice')}")
+
+    except Exception as e:
+        print(f"\n❌ Error: {e}")
+
+if __name__ == "__main__":
+    main()
