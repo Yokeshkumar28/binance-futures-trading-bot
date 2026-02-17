@@ -1,65 +1,138 @@
-# Binance Futures Trading CLI
+## Binance Futures Trading CLI
 
-A Python CLI tool to place MARKET and LIMIT orders on Binance Futures Testnet.
+A Python Command Line Interface (CLI) tool to place MARKET and LIMIT orders on Binance Futures Testnet.
 
----
+This project demonstrates API integration, validation, structured logging, and clean CLI-based architecture.
 
-## Features
+## FEATURES
 
-- Place MARKET orders
-- Place LIMIT orders
-- Error handling
-- Logging support
-- Secure API management using .env
+Place MARKET orders
 
----
+Place LIMIT orders
 
-## Setup Instructions
+Input validation
 
-1. Clone the repository
+Proper error handling
+
+Structured logging
+
+Secure API management using .env
+
+Modular and readable code structure
+
+## TECH STACK
+
+Python 3.x
+
+Binance Futures API
+
+python-binance
+
+argparse
+
+logging
+
+python-dotenv
+
+## SETUP INSTRUCTIONS
+
+1. Clone the Repository
 
 git clone https://github.com/Yokeshkumar28/binance-futures-trading-bot.git
+
 cd binance-futures-trading-bot
 
-2. Create virtual environment
+2. Create Virtual Environment
 
 python -m venv venv
+
+## Activate environment:
+
+# Windows:
 venv\Scripts\activate
 
-3. Install dependencies
+# Mac/Linux:
+source venv/bin/activate
+
+3. Install Dependencies
 
 pip install -r requirements.txt
 
-4. Create .env file
+4. Create .env File
 
-BINANCE_API_KEY=your_api_key
-BINANCE_API_SECRET=your_secret_key
+Create a .env file in the root directory and add:
 
-Note: Use Binance Futures Testnet API keys.
+BINANCE_API_KEY=your_testnet_api_key
+BINANCE_API_SECRET=your_testnet_secret_key
 
----
+Note: Use Binance Futures Testnet API keys only.
 
-## How to Run
+## HOW TO RUN
 
-### MARKET Order
+# MARKET Order:
 
 python cli.py --symbol BTCUSDT --side BUY --type MARKET --quantity 0.003
 
-### LIMIT Order
+# LIMIT Order:
 
 python cli.py --symbol BTCUSDT --side BUY --type LIMIT --quantity 0.003 --price 50000
 
----
+# VALIDATION & ERROR HANDLING
 
-## Assumptions
+Validates order type
 
-- Binance Futures Testnet is used.
-- Minimum notional value must be >= 100 USDT.
-- Valid API keys are required.
-- BTCUSDT pair tested.
+Ensures price is provided for LIMIT orders
 
----
+Handles Binance API errors
 
-## Logs
+Handles insufficient balance
 
-Log files are stored in the logs directory.
+Handles minimum notional requirement (>= 100 USDT)
+
+## LOGGING
+
+Logs are stored in the logs/ directory
+
+Each order request and response is logged with timestamps
+
+Errors are logged for debugging
+
+## ASSUMPTIONS
+
+Binance Futures Testnet is used
+
+Minimum notional value must be >= 100 USDT
+
+Sufficient USDT balance must be available
+
+BTCUSDT trading pair tested
+
+## PROJECT STRUCTURE
+
+binance-futures-trading-bot/
+
+cli.py
+order_service.py
+utils.py
+config.py
+logs/
+.env
+requirements.txt
+README.md
+
+## LEARNING OUTCOMES
+
+Working with REST APIs
+
+Command Line Interface development
+
+Clean code structure
+
+Exception handling
+
+Logging best practices
+
+Environment variable management
+
+# Author
+Yokesh Kumar Kuruva
